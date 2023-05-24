@@ -29,10 +29,10 @@ $(document).ready(function () {
       for (let j = i + 3; j < word.length; j++) {
         var smn = word.substring(i, j + 1);
         console.log(smn);
-        var url = `https://www.dictionaryapi.com/api/v3/references/sd2/json/${smn}?key=8bd7aebb-af8d-4d2d-837b-b72dd39c3011`;
+        var url = `https://api.dictionaryapi.dev/api/v2/entries/en/${smn}`;
         const response = await fetch(url);
         const data = await response.json();
-        if (data[0].meta != null) {
+        if (data[0].word != null) {
           res.push(`'${smn}'`);
           foundMatch = true;
         }
@@ -125,6 +125,6 @@ $(document).ready(function () {
         .insertAfter("#result1")
         .html(resultText2);
       changeColors(answer);
-    }, 500);
+    }, 3000);
   });
 });
