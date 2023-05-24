@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <title>Peek</title>
+    <style>
+      #generate {
+        height: 50px;
+        position: fixed;
+        left: 1100px;
+        top: 500px;
+      }
+      .formEl {
+        max-width: 550px;
+        margin: auto;
+        position: relative;
+      }
+      .formEl:not(.form-check) {
+        background-color: #d1d1d1;
+      }
+      form {
+        margin: 50px;
+      }
+      .prompt {
+        position: relative;
+        left: 20%;
+        top: -10px;
+        margin: auto;
+        height: 40px;
+        color: #dcd7d7;
+        background: #f29f0930;
+        border: none;
+      }
+      #specLabel {
+        position: relative;
+        left: 215px;
+        bottom: -10px;
+      }
+      .symbol {
+        background-color: orange;
+      }
+      .card,
+      .collapse {
+        background-color: transparent;
+        color: #e4e4e4ba;
+        max-width: 700px;
+        font-family: monospace;
+        border: none;
+      }
+      body {
+        background: url(Background.jpg) rgba(0, 0, 0, 73%);
+        background-size: cover;
+        background-blend-mode: multiply;
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(80, 79, 79)">
+    <nav class="navbar navbar1" style="background-color: transparent">
+      <a class="navbar-brand" href="#">
+        <img src="Logo.png" width="30" height="30" alt="" />
+      </a>
+      <a
+        href="About.html"
+        class="position-relative start-75 mr-5 text-secondary"
+        >About</a
+      >
+    </nav>
+    <form>
+      <div class="form-group">
+        <p>
+          <button
+            class="prompt btn btn-primary"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample1"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Security question 1 (click for instructions)
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample1" style="text-align: center">
+          <div class="card card-body" style="text-align: center">
+            Please pick a security question that you think you'll remember, then
+            provide an answer in the text-box. Your response should constitute
+            of only letters with no spaces in the middle, and should be between
+            4 and 12 characters long.
+          </div>
+        </div>
+        <select class="formEl form-control" id="exampleFormControlSelect1">
+          <option>What is a major food allergy that you have?</option>
+          <option>Where did you get your first job?</option>
+          <option>What was the street name of your first school?</option>
+          <option>What was the brand of your first computer?</option>
+          <option>What was the brand of your first phone?</option>
+          <option>What is your father's middle name?</option>
+          <option>What is your mother's middle name?</option>
+          <option>What was the name of your first school?</option>
+          <option>What model was your first car?</option>
+          <option>What was the name of your first pet?</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="security security1 formEl form-control"
+          id="exampleFormControlInput1"
+          placeholder="Type your answer here..."
+          autocomplete="off"
+        />
+      </div>
+    </form>
+    <form>
+      <div class="form-group">
+        <p>
+          <button
+            class="prompt btn btn-primary"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample2"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Security question 2 (click for instructions)
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample2" style="text-align: center">
+          <div class="card card-body" style="text-align: center">
+            Please pick a security question that you think you'll remember, then
+            provide an answer in the text-box. Your response should constitute
+            of only letters with no spaces in the middle, and should be between
+            4 and 12 characters long.
+          </div>
+        </div>
+        <select class="formEl form-control" id="exampleFormControlSelect1">
+          <option>what is the color of your mother's eyes?</option>
+          <option>what is the name of the hospital you were born in?</option>
+          <option>what is your zodiac sign?</option>
+          <option>what is your best friend's middle name?</option>
+          <option>What month is your pet’s birthday?</option>
+          <option>what was the name of your first grade teacher?</option>
+          <option>
+            What is the name of the first foreign country that you visited?
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="security security2 formEl form-control"
+          id="exampleFormControlInput1"
+          placeholder="Type your answer here..."
+          autocomplete="off"
+        />
+      </div>
+    </form>
+    <form>
+      <div class="form-group">
+        <p>
+          <button
+            class="prompt btn btn-primary"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample3"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Security question 3 (click for instructions)
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample3" style="text-align: center">
+          <div class="card card-body" style="text-align: center">
+            Please pick a security question that you think you'll remember, then
+            provide an answer in the text-box. Your response should constitute
+            of only integers with no spaces in the middle, and should be between
+            3 and 6 characters long.
+          </div>
+        </div>
+        <select class="formEl form-control" id="exampleFormControlSelect1">
+          <option>
+            What year did you take your first driving (road) test?
+          </option>
+          <option>What year was your first car made?</option>
+          <option>What year did you get your first Diphtheria vaccine?</option>
+          <option>What year did you get your first car?</option>
+          <option>What year did you get your first job?</option>
+          <option>What year did you get your first pet?</option>
+          <option>
+            What year did you start your education for the first time?
+          </option>
+          <option>What year was your paternal grandfather born?</option>
+          <option>What is your building/street number?</option>
+          <option>
+            What year did you leave your home country for the first time?
+          </option>
+          <option>What is your car's plate number?</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="security security3 formEl form-control"
+          id="exampleFormControlInput1"
+          placeholder="Type your answer here..."
+          autocomplete="off"
+        />
+      </div>
+    </form>
+    <form>
+      <div class="form-group col-md-4">
+        <p>
+          <button
+            id="specLabel"
+            class="prompt btn btn-secondary"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample4"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Minimum Password Length
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample4" style="text-align: center">
+          <div class="card card-body" style="text-align: center">
+            Please pick the minimum length of the password you would like us to
+            generate. The specified length should be between 5 and 15.
+          </div>
+        </div>
+        <input
+          type="number"
+          max="15"
+          min="5"
+          class="length formEl form-control"
+          id="exampleFormControlInput1"
+          placeholder="5"
+          style="left: 42%; width: 80px"
+          autocomplete="off"
+        />
+      </div>
+    </form>
+    <div>
+      <button
+        type="button"
+        id="symbolChooser"
+        class="prompt btn btn-secondary"
+        data-container="body"
+        data-toggle="popover"
+        data-placement="left"
+        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+        style="left: 280px"
+      >
+        Click here to include symbols
+      </button>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="generator btn btn-success m-2">
+        Generate
+      </button>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="Generate.js"></script>
+  </body>
+</html>
