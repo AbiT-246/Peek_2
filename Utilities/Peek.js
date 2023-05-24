@@ -20,21 +20,23 @@ $(document).ready(function () {
     $("#arrow").hide();
   });
 
-  async function testDictionary(given) {
-    const word = given.replace(/[^a-zA-Z ]/g, "");
+  function testDictionary(given) {
+    const string = given.replace(/[^a-zA-Z ]/g, "");
     var res = [];
     var foundMatch = false;
 
-    for (let i = 0; i < word.length - 3; i++) {
-      for (let j = i + 3; j < word.length; j++) {
-        var smn = word.substring(i, j + 1);
+    const englishWords = new Set(require("word-list-json"));
+
+    // Convert the string to lowercase for case-insensitive matching
+    string = string.toLowerCase();
+
+    // Check if any substring in the string is an English word
+    for (let i = 0; i < string.length; i++) {
+      for (let j = i; j < string.length; j++) {
+        const smn = string.substring(i, j + 1);
         console.log(smn);
-        var url = `https://www.dictionaryapi.com/api/v3/references/sd2/json/${smn}?key=8bd7aebb-af8d-4d2d-837b-b72dd39c3011`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data[0].meta != null) {
-          res.push(`'${smn}'`);
-          foundMatch = true;
+        if (englishWords.has(smn)) {
+          res.push(smn);
         }
       }
     }
