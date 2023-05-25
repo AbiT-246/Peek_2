@@ -55,6 +55,37 @@ $(document).ready(function () {
     return result;
   }
 
+  function checkChars(string) {
+    var res = [];
+    if (!/[A-Z]/.test(string)) {
+      res.push("uppercase characters");
+    }
+    if (!/\d/.test(string)) {
+      res.push("numbers");
+    }
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    if (!specialChars.test(string)) {
+      res.push("symbols");
+    }
+
+    if (res.length == 0) {
+      return null;
+    }
+
+    var result = "";
+
+    if (res.length == 1) {
+      result = res + ".";
+    } else {
+      result =
+        res.slice(0, -1).join(", ") + ", and " + res[res.length - 1] + ".";
+    }
+
+    return result;
+  }
+
+  console.log(checkChars("Pass"));
+
   $("form").on("submit", async function (e) {
     e.preventDefault(); // Prevent the default form submission behavior
     $(".navbar").removeClass("navbar1");
@@ -88,7 +119,6 @@ $(document).ready(function () {
             .addClass("results")
             .insertAfter(".navbar")
             .html(resultText1);
-          // changeColors(answer);
           break;
         }
       }
@@ -124,7 +154,23 @@ $(document).ready(function () {
         .addClass("results")
         .insertAfter("#result1")
         .html(resultText2);
-      changeColors(answer);
     }, 1000);
+
+    const length = newVal.length;
+    const complexity = checkChars(newVal);
+    var resultText3;
+    if (complexity) {
+      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long; it does not contain any ${complexity}`;
+    } else {
+      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long; it contains uppercase characters, numbers, and symbols.`;
+    }
+
+    setTimeout(function () {
+      $("<div>")
+        .attr("id", "result3")
+        .addClass("results")
+        .insertAfter("#result2")
+        .html(resultText3);
+    }, 5000);
   });
 });
