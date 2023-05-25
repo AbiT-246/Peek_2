@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "an-array-of-english-words": "^2.0.0",
     "word-list-json": "^0.2.0"
   }
 }
