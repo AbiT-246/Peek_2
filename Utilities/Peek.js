@@ -101,7 +101,7 @@ $(document).ready(function () {
       "qwerty123",
       "1q2w3e",
     ];
-    var res = ["0"];
+    var res = ["x"];
     var count = false;
     for (let i = 0; i < word.length - 2; i++) {
       for (let j = i + 2; j < word.length; j++) {
@@ -128,10 +128,14 @@ $(document).ready(function () {
 
     var result = "";
 
-    if (res.length == 1) {
+    if (res.length == 2) {
+      const index = res.indexOf("x");
+      res.splice(index, 1);
       info.push(1);
       result = res + ".";
     } else {
+      const index = res.indexOf("x");
+      res.splice(index, 1);
       info.push(res.length);
       result =
         res.slice(0, -1).join(", ") + ", and " + res[res.length - 1] + ".";
@@ -141,39 +145,39 @@ $(document).ready(function () {
   }
 
   function calculate(values) {
-    const [word, length, complexity, pattern] = values;
-    // console.log(values[4]);
-    // console.log(numBreaches);
-    // var leaked = null;
-    // if (numBreaches == 0) {
-    //   leaked = 45;
-    // } else if (numBreaches >= 1 && numBreaches <= 20) {
-    //   leaked = 40;
-    // } else if (numBreaches >= 21 && numBreaches <= 100) {
-    //   leaked = 35;
-    // } else if (numBreaches >= 101 && numBreaches <= 1000) {
-    //   leaked = 30;
-    // } else if (numBreaches >= 1001 && numBreaches <= 5000) {
-    //   leaked = 25;
-    // } else if (numBreaches >= 5001 && numBreaches <= 20000) {
-    //   leaked = 20;
-    // } else if (numBreaches >= 20001 && numBreaches <= 100000) {
-    //   leaked = 15;
-    // } else if (numBreaches >= 100001 && numBreaches <= 1000000) {
-    //   leaked = 10;
-    // } else if (numBreaches >= 1000001 && numBreaches <= 10000000) {
-    //   leaked = 5;
-    // } else if (numBreaches >= 10000001) {
-    //   leaked = 0;
-    // }
-    // console.log(leaked);
+    const [word, complexity, pattern, numBreaches, length] = values;
+    console.log(values[4]);
+    console.log(numBreaches);
+    var leaked = null;
+    if (numBreaches == 0) {
+      leaked = 45;
+    } else if (numBreaches >= 1 && numBreaches <= 20) {
+      leaked = 40;
+    } else if (numBreaches >= 21 && numBreaches <= 100) {
+      leaked = 35;
+    } else if (numBreaches >= 101 && numBreaches <= 1000) {
+      leaked = 30;
+    } else if (numBreaches >= 1001 && numBreaches <= 5000) {
+      leaked = 25;
+    } else if (numBreaches >= 5001 && numBreaches <= 20000) {
+      leaked = 20;
+    } else if (numBreaches >= 20001 && numBreaches <= 100000) {
+      leaked = 15;
+    } else if (numBreaches >= 100001 && numBreaches <= 1000000) {
+      leaked = 10;
+    } else if (numBreaches >= 1000001 && numBreaches <= 10000000) {
+      leaked = 5;
+    } else if (numBreaches >= 10000001) {
+      leaked = 0;
+    }
+    console.log(leaked);
     const patternP = 15 - (15 / 1) * pattern;
     console.log(patternP);
     const complexityP = 15 - (15 / 3) * complexity;
     console.log(complexityP);
     const wordP = 10 - (10 / 3) * word;
     console.log(wordP);
-    const result = length + patternP + complexityP + wordP;
+    const result = leaked + length + patternP + complexityP + wordP;
     return result;
   }
 
@@ -189,47 +193,6 @@ $(document).ready(function () {
     $("#container").removeClass("indicatorGreen");
 
     var newVal = $("#password").val();
-    const sha1Hash = CryptoJS.SHA1(newVal).toString();
-    var prefix = sha1Hash.slice(0, 5);
-    var suffix = sha1Hash.substr(5);
-
-    var url = `https://api.pwnedpasswords.com/range/${prefix}`;
-    $.get(url, async function (string) {
-      const hashArray = string.split("\n");
-      var numBreaches = null;
-      for (let i = 0; i < hashArray.length; i++) {
-        const hash = hashArray[i].split(":");
-        if (hash[0] === suffix.toUpperCase()) {
-          numBreaches = parseInt(hash[1]);
-
-          const resultText1 = `This password has been leaked <h6 class = "part">${numBreaches}</h6> times.`;
-
-          $("<div>")
-            .attr("id", "result1")
-            .addClass("results")
-            .insertAfter(".navbar")
-            .html(resultText1);
-          break;
-        }
-      }
-
-      if (numBreaches == null) {
-        numBreaches = 0;
-
-        const resultText1 = `This password has been leaked <h6 id = "numBreaches" class = "part">${numBreaches}</h6> times.`;
-        $("<div>")
-          .attr("id", "result1")
-          .addClass("results")
-          .insertAfter(".navbar")
-          .html(resultText1);
-      }
-      testDictionary(newVal);
-      info.push(newVal.length);
-      checkChars(newVal);
-      checkPattern(newVal);
-      info.push(numBreaches);
-      console.log(info);
-    });
 
     var dictionary;
     var resultText2;
@@ -296,37 +259,61 @@ $(document).ready(function () {
         .html(resultText4);
     }, 10000);
 
-    // const value = $("#numBreaches").val();
-    // console.log(value);
+    const sha1Hash = CryptoJS.SHA1(newVal).toString();
+    var prefix = sha1Hash.slice(0, 5);
+    var suffix = sha1Hash.substr(5);
 
-    // const result = calculate(info);
-    // result = result + pointer;
+    var url = `https://api.pwnedpasswords.com/range/${prefix}`;
+    $.get(url, async function (string) {
+      const hashArray = string.split("\n");
+      var numBreaches = null;
+      for (let i = 0; i < hashArray.length; i++) {
+        const hash = hashArray[i].split(":");
+        if (hash[0] === suffix.toUpperCase()) {
+          numBreaches = parseInt(hash[1]);
 
-    console.log(result);
-    if (result <= 25) {
-      $("#inner").addClass("red").animate(
+          const resultText1 = `This password has been leaked <h6 class = "part">${numBreaches}</h6> times.`;
+
+          $("<div>")
+            .attr("id", "result1")
+            .addClass("results")
+            .insertAfter(".navbar")
+            .html(resultText1);
+          break;
+        }
+      }
+
+      if (numBreaches == null) {
+        numBreaches = 0;
+
+        const resultText1 = `This password has been leaked <h6 id = "numBreaches" class = "part">${numBreaches}</h6> times.`;
+        $("<div>")
+          .attr("id", "result1")
+          .addClass("results")
+          .insertAfter(".navbar")
+          .html(resultText1);
+      }
+      info.push(numBreaches);
+      info.push(newVal.length);
+      console.log(info);
+
+      const result = calculate(info);
+
+      console.log(result);
+      if (result <= 25) {
+        $("#inner").addClass("red");
+      } else if (result <= 50) {
+        $("#inner").addClass("yellow");
+      } else {
+        $("#inner").addClass("green");
+      }
+      $("#inner").animate(
         {
           height: "0%",
-          height: "25%",
+          height: `${result}%`,
         },
         3000
       );
-    } else if (result <= 50) {
-      $("#inner").addClass("yellow").animate(
-        {
-          height: "0%",
-          height: "50%",
-        },
-        3000
-      );
-    } else {
-      $("#inner").addClass("green").animate(
-        {
-          height: "0%",
-          height: "100%",
-        },
-        3000
-      );
-    }
+    });
   });
 });
