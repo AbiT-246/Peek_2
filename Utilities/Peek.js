@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var info = [];
   $("#meme1").hide();
   $("#Happy").hide();
 
@@ -42,6 +43,7 @@ $(document).ready(function () {
       }
     }
     console.log(res);
+    info.push(res.length);
     if (res.length == 0) {
       return null;
     }
@@ -71,6 +73,7 @@ $(document).ready(function () {
       res.push("symbols");
     }
 
+    info.push(res.length);
     if (res.length == 0) {
       return null;
     }
@@ -117,19 +120,60 @@ $(document).ready(function () {
         }
       }
     }
+
     if (res.length == 1 && count == false) {
+      info.push(0);
       return null;
     }
 
     var result = "";
 
     if (res.length == 1) {
+      info.push(1);
       result = res + ".";
     } else {
+      info.push(res.length);
       result =
         res.slice(0, -1).join(", ") + ", and " + res[res.length - 1] + ".";
     }
 
+    return result;
+  }
+
+  function calculate(values) {
+    const [word, length, complexity, pattern] = values;
+    // console.log(values[4]);
+    // console.log(numBreaches);
+    // var leaked = null;
+    // if (numBreaches == 0) {
+    //   leaked = 45;
+    // } else if (numBreaches >= 1 && numBreaches <= 20) {
+    //   leaked = 40;
+    // } else if (numBreaches >= 21 && numBreaches <= 100) {
+    //   leaked = 35;
+    // } else if (numBreaches >= 101 && numBreaches <= 1000) {
+    //   leaked = 30;
+    // } else if (numBreaches >= 1001 && numBreaches <= 5000) {
+    //   leaked = 25;
+    // } else if (numBreaches >= 5001 && numBreaches <= 20000) {
+    //   leaked = 20;
+    // } else if (numBreaches >= 20001 && numBreaches <= 100000) {
+    //   leaked = 15;
+    // } else if (numBreaches >= 100001 && numBreaches <= 1000000) {
+    //   leaked = 10;
+    // } else if (numBreaches >= 1000001 && numBreaches <= 10000000) {
+    //   leaked = 5;
+    // } else if (numBreaches >= 10000001) {
+    //   leaked = 0;
+    // }
+    // console.log(leaked);
+    const patternP = 15 - (15 / 1) * pattern;
+    console.log(patternP);
+    const complexityP = 15 - (15 / 3) * complexity;
+    console.log(complexityP);
+    const wordP = 10 - (10 / 3) * word;
+    console.log(wordP);
+    const result = length + patternP + complexityP + wordP;
     return result;
   }
 
@@ -145,7 +189,6 @@ $(document).ready(function () {
     $("#container").removeClass("indicatorGreen");
 
     var newVal = $("#password").val();
-
     const sha1Hash = CryptoJS.SHA1(newVal).toString();
     var prefix = sha1Hash.slice(0, 5);
     var suffix = sha1Hash.substr(5);
@@ -173,13 +216,19 @@ $(document).ready(function () {
       if (numBreaches == null) {
         numBreaches = 0;
 
-        const resultText1 = `This password has been leaked <h6 class = "part">${numBreaches}</h6> times.`;
+        const resultText1 = `This password has been leaked <h6 id = "numBreaches" class = "part">${numBreaches}</h6> times.`;
         $("<div>")
           .attr("id", "result1")
           .addClass("results")
           .insertAfter(".navbar")
           .html(resultText1);
       }
+      testDictionary(newVal);
+      info.push(newVal.length);
+      checkChars(newVal);
+      checkPattern(newVal);
+      info.push(numBreaches);
+      console.log(info);
     });
 
     var dictionary;
@@ -206,10 +255,13 @@ $(document).ready(function () {
     const length = newVal.length;
     const complexity = checkChars(newVal);
     var resultText3;
+    var resultText31;
     if (complexity) {
-      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long; it does not contain any ${complexity}`;
+      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long...`;
+      resultText31 = `It does not contain any ${complexity}`;
     } else {
-      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long; it contains uppercase characters, numbers, and symbols.`;
+      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long`;
+      resultText31 = `it contains uppercase characters, numbers, and symbols.`;
     }
 
     setTimeout(function () {
@@ -219,6 +271,14 @@ $(document).ready(function () {
         .insertAfter("#result2")
         .html(resultText3);
     }, 5000);
+
+    setTimeout(function () {
+      $("<div>")
+        .attr("id", "result31")
+        .addClass("results")
+        .insertAfter("#result3")
+        .html(resultText31);
+    }, 7500);
 
     var resultText4;
     if (checkPattern != null) {
@@ -232,8 +292,41 @@ $(document).ready(function () {
       $("<div>")
         .attr("id", "result4")
         .addClass("results")
-        .insertAfter("#result3")
+        .insertAfter("#result31")
         .html(resultText4);
-    }, 7500);
+    }, 10000);
+
+    // const value = $("#numBreaches").val();
+    // console.log(value);
+
+    // const result = calculate(info);
+    // result = result + pointer;
+
+    console.log(result);
+    if (result <= 25) {
+      $("#inner").addClass("red").animate(
+        {
+          height: "0%",
+          height: "25%",
+        },
+        3000
+      );
+    } else if (result <= 50) {
+      $("#inner").addClass("yellow").animate(
+        {
+          height: "0%",
+          height: "50%",
+        },
+        3000
+      );
+    } else {
+      $("#inner").addClass("green").animate(
+        {
+          height: "0%",
+          height: "100%",
+        },
+        3000
+      );
+    }
   });
 });
