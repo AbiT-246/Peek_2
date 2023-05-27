@@ -1,21 +1,6 @@
 $(document).ready(function () {
   var info = [];
-  $("#meme1").hide();
-  $("#Happy").hide();
   $(".scale").hide();
-
-  const changeColors = (calc) => {
-    if (calc <= 95) {
-      $("h6").css("color", "red");
-      $("#container").addClass("indicatorRed");
-    } else if ((96 <= calc) & (calc < 100)) {
-      $("h6").css("color", "yellow");
-      $("#container").addClass("indicatorYellow");
-    } else {
-      $("h6").css("color", "green");
-      $("#container").addClass("indicatorGreen");
-    }
-  };
 
   $(".navbar").on("keyup", function (event) {
     $(this).removeClass("navbar1");
@@ -178,7 +163,7 @@ $(document).ready(function () {
   }
 
   $("form").on("submit", async function (e) {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
     info = [];
     $(".scale").show();
     $("#inner").removeClass("red");
@@ -188,12 +173,7 @@ $(document).ready(function () {
 
     $(".navbar").removeClass("navbar1");
     $("#arrow").hide();
-    $("#meme1").hide();
-    $("#Happy").hide();
     $(".results").remove();
-    $("#container").removeClass("indicatorRed");
-    $("#container").removeClass("indicatorYellow");
-    $("#container").removeClass("indicatorGreen");
 
     var newVal = $("#password").val();
 
