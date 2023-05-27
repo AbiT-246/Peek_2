@@ -1,6 +1,8 @@
 $(document).ready(function () {
+  var info = [];
   $("#meme1").hide();
   $("#Happy").hide();
+  $(".scale").hide();
 
   const changeColors = (calc) => {
     if (calc <= 95) {
@@ -27,21 +29,18 @@ $(document).ready(function () {
 
     var list2 = list1[0].split(", ");
     list2 = list2.map((i) => i);
-    console.log(list2);
     const word = given.replace(/[^a-zA-Z ]/g, "");
     var res = [];
 
     for (let i = 0; i < word.length - 2; i++) {
       for (let j = i + 2; j < word.length; j++) {
         var smn = word.substring(i, j + 1);
-        console.log(smn);
         if (list2.includes(smn)) {
-          console.log(true);
           res.push(`"${smn}"`);
         }
       }
     }
-    console.log(res);
+    info.push(res.length);
     if (res.length == 0) {
       return null;
     }
@@ -71,6 +70,7 @@ $(document).ready(function () {
       res.push("symbols");
     }
 
+    info.push(res.length);
     if (res.length == 0) {
       return null;
     }
@@ -98,15 +98,15 @@ $(document).ready(function () {
       "qwerty123",
       "1q2w3e",
     ];
-    var res = ["0"];
+    var res = ["x"];
     var count = false;
     for (let i = 0; i < word.length - 2; i++) {
       for (let j = i + 2; j < word.length; j++) {
         var smn = word.substring(i, j + 1);
+        console.log(smn);
         for (const k of list0) {
           if (k == smn && k.length > res[0].length) {
-            console.log(smn);
-            res[0] = k;
+            res.push(smn);
             count = true;
             break;
           }
@@ -117,24 +117,75 @@ $(document).ready(function () {
         }
       }
     }
+    console.log(res[1]);
+
     if (res.length == 1 && count == false) {
+      info.push(0);
       return null;
     }
 
     var result = "";
 
-    if (res.length == 1) {
+    if (res.length == 2) {
+      const index = res.indexOf("x");
+      res.splice(index, 1);
+      info.push(1);
       result = res + ".";
     } else {
+      const index = res.indexOf("x");
+      res.splice(index, 1);
+      info.push(res.length);
       result =
         res.slice(0, -1).join(", ") + ", and " + res[res.length - 1] + ".";
     }
+    console.log(res);
+    return result;
+  }
 
+  function calculate(values) {
+    const [word, complexity, pattern, numBreaches, length] = values;
+    var leaked = null;
+    if (numBreaches == 0) {
+      leaked = 45;
+    } else if (numBreaches >= 1 && numBreaches <= 20) {
+      leaked = 40;
+    } else if (numBreaches >= 21 && numBreaches <= 100) {
+      leaked = 35;
+    } else if (numBreaches >= 101 && numBreaches <= 1000) {
+      leaked = 30;
+    } else if (numBreaches >= 1001 && numBreaches <= 5000) {
+      leaked = 25;
+    } else if (numBreaches >= 5001 && numBreaches <= 20000) {
+      leaked = 20;
+    } else if (numBreaches >= 20001 && numBreaches <= 100000) {
+      leaked = 15;
+    } else if (numBreaches >= 100001 && numBreaches <= 1000000) {
+      leaked = 10;
+    } else if (numBreaches >= 1000001 && numBreaches <= 10000000) {
+      leaked = 5;
+    } else if (numBreaches >= 10000001) {
+      leaked = 0;
+    }
+    console.log(leaked);
+    const patternP = 15 - (15 / 1) * pattern;
+    console.log(patternP);
+    const complexityP = 15 - (15 / 3) * complexity;
+    console.log(complexityP);
+    const wordP = 10 - (10 / 3) * word;
+    console.log(wordP);
+    const result = leaked + length + patternP + complexityP + wordP;
     return result;
   }
 
   $("form").on("submit", async function (e) {
     e.preventDefault(); // Prevent the default form submission behavior
+    info = [];
+    $(".scale").show();
+    $("#inner").removeClass("red");
+    $("#inner").removeClass("yellow");
+    $("#inner").removeClass("green");
+    $("#inner").css("height", "0%");
+
     $(".navbar").removeClass("navbar1");
     $("#arrow").hide();
     $("#meme1").hide();
@@ -145,6 +196,70 @@ $(document).ready(function () {
     $("#container").removeClass("indicatorGreen");
 
     var newVal = $("#password").val();
+
+    var dictionary;
+    var resultText2;
+    try {
+      dictionary = testDictionary(newVal);
+      resultText2 = `This password contains the <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common dictionary words: </a> <h6 class = "part">${dictionary}</h6>`;
+    } catch {
+      resultText2 = `This password doesn't contain any common dictionary words.`;
+    }
+    if (dictionary == null) {
+      resultText2 = `This password doesn't contain any common dictionary words.`;
+    }
+
+    setTimeout(function () {
+      $("<div>")
+        .attr("id", "result2")
+        .addClass("results")
+        .insertAfter("#result1")
+        .html(resultText2);
+    }, 2500);
+
+    const length = newVal.length;
+    const complexity = checkChars(newVal);
+    var resultText3;
+    var resultText31;
+    if (complexity) {
+      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long...`;
+      resultText31 = `It does not contain any ${complexity}`;
+    } else {
+      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long`;
+      resultText31 = `it contains uppercase characters, numbers, and symbols.`;
+    }
+
+    setTimeout(function () {
+      $("<div>")
+        .attr("id", "result3")
+        .addClass("results")
+        .insertAfter("#result2")
+        .html(resultText3);
+    }, 5000);
+
+    setTimeout(function () {
+      $("<div>")
+        .attr("id", "result31")
+        .addClass("results")
+        .insertAfter("#result3")
+        .html(resultText31);
+    }, 7500);
+
+    var resultText4;
+    if (checkPattern != null) {
+      const patterns = checkPattern(newVal);
+      resultText4 = `This password contains the common password patterns: <h6 class = "part">${patterns}</h6>`;
+    } else {
+      resultText4 = `This password does not contain any common password patterns.`;
+    }
+
+    setTimeout(function () {
+      $("<div>")
+        .attr("id", "result4")
+        .addClass("results")
+        .insertAfter("#result31")
+        .html(resultText4);
+    }, 10000);
 
     const sha1Hash = CryptoJS.SHA1(newVal).toString();
     var prefix = sha1Hash.slice(0, 5);
@@ -173,67 +288,37 @@ $(document).ready(function () {
       if (numBreaches == null) {
         numBreaches = 0;
 
-        const resultText1 = `This password has been leaked <h6 class = "part">${numBreaches}</h6> times.`;
+        const resultText1 = `This password has been leaked <h6 id = "numBreaches" class = "part">${numBreaches}</h6> times.`;
         $("<div>")
           .attr("id", "result1")
           .addClass("results")
           .insertAfter(".navbar")
           .html(resultText1);
       }
+      info.push(numBreaches);
+      info.push(newVal.length);
+      console.log(info);
+
+      const result = calculate(info);
+
+      console.log(result);
+      $(".newDiv")
+        .addClass("border-left border-secondary")
+        .css("box-shadow: 3px -1px 15px #565353ad inset");
+      if (result <= 25) {
+        $("#inner").addClass("red");
+      } else if (result <= 50) {
+        $("#inner").addClass("yellow");
+      } else {
+        $("#inner").addClass("green");
+      }
+      $("#inner").animate(
+        {
+          height: "0%",
+          height: `${result}%`,
+        },
+        3000
+      );
     });
-
-    var dictionary;
-    var resultText2;
-    try {
-      dictionary = testDictionary(newVal);
-      resultText2 = `This password contains the <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common dictionary words: </a> <h6 class = "part">${dictionary}</h6>`;
-    } catch {
-      resultText2 = `This password doesn't contain any common dictionary words.`;
-    }
-    if (dictionary == null) {
-      resultText2 = `This password doesn't contain any common dictionary words.`;
-    }
-    console.log(dictionary);
-
-    setTimeout(function () {
-      $("<div>")
-        .attr("id", "result2")
-        .addClass("results")
-        .insertAfter("#result1")
-        .html(resultText2);
-    }, 2500);
-
-    const length = newVal.length;
-    const complexity = checkChars(newVal);
-    var resultText3;
-    if (complexity) {
-      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long; it does not contain any ${complexity}`;
-    } else {
-      resultText3 = `This password is <h6 class = "part">${length}</h6> characters long; it contains uppercase characters, numbers, and symbols.`;
-    }
-
-    setTimeout(function () {
-      $("<div>")
-        .attr("id", "result3")
-        .addClass("results")
-        .insertAfter("#result2")
-        .html(resultText3);
-    }, 5000);
-
-    var resultText4;
-    if (checkPattern != null) {
-      const patterns = checkPattern(newVal);
-      resultText4 = `This password contains the common password patterns: <h6 class = "part">${patterns}</h6>`;
-    } else {
-      resultText4 = `This password does not contain any common password patterns.`;
-    }
-
-    setTimeout(function () {
-      $("<div>")
-        .attr("id", "result4")
-        .addClass("results")
-        .insertAfter("#result3")
-        .html(resultText4);
-    }, 7500);
   });
 });

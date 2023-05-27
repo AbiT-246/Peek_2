@@ -38,6 +38,7 @@
         /* border: dashed red; */
         color: #ffffffb8;
         font-family: monospace;
+        max-width: fit-content;
         overflow: hidden; /* Ensures the content is not revealed until the animation */
         border-right: 0.15em solid transparent; /* The typwriter cursor */
         white-space: nowrap; /* Keeps the content on a single line */
@@ -127,6 +128,42 @@
         animation-iteration-count: infinite;
       }
 
+      .newDiv {
+        height: 350px;
+        width: 300px;
+        position: absolute;
+        top: 15%;
+        z-index: 6;
+        left: 75%;
+        text-align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .scale {
+        height: 300px;
+        border-radius: 25% 25% 0% 0%;
+        z-index: 6;
+        box-shadow: 3px -1px 15px #565353ad inset;
+      }
+
+      .line {
+        width: 10px;
+        z-index: 6;
+        border: 1px solid grey;
+      }
+
+      .red {
+        background-color: #d6232373;
+      }
+
+      .green {
+        background-color: rgba(53, 194, 53, 0.59);
+      }
+      .yellow {
+        background-color: #78781bc9;
+      }
+
       @keyframes green {
         from {
           border: none;
@@ -142,6 +179,14 @@
         background: url(Utilities/Background.jpg) rgba(0, 0, 0, 73%);
         background-size: cover;
         background-blend-mode: multiply;
+      }
+
+      #inner {
+        width: 100%;
+        height: 0%;
+        bottom: 0%;
+        overflow: hidden;
+        border-radius: 25% 25% 0% 0%;
       }
 
       #meme1 {
@@ -209,6 +254,17 @@
           >About</a
         >
       </nav>
+      <div class="newDiv py-5 float-right d-inline-block">
+        <div class="position-relative scale border border-secondary">
+          <div
+            style="top: 25%; left: 0.5%"
+            class="line position-absolute"
+          ></div>
+          <div style="top: 50%" class="line position-absolute"></div>
+          <div style="top: 75%" class="line position-absolute"></div>
+          <div id="inner" class="position-absolute border border-dark"></div>
+        </div>
+      </div>
       <img id="Happy" src="Utilities/Happy2.gif" alt="" />
       <img id="meme1" src="Utilities/Gif.gif" alt="" />
       <button type="button" class="text-light btn btn-success" id="generate">
