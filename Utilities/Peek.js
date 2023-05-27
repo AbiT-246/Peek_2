@@ -246,7 +246,7 @@ $(document).ready(function () {
     }, 7500);
 
     var resultText4;
-    if (checkPattern != null) {
+    if (checkPattern(newVal) != null) {
       const patterns = checkPattern(newVal);
       resultText4 = `This password contains the common password patterns: <h6 class = "part">${patterns}</h6>`;
     } else {
