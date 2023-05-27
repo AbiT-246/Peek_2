@@ -106,7 +106,7 @@ $(document).ready(function () {
         console.log(smn);
         for (const k of list0) {
           if (k == smn && k.length > res[0].length) {
-            res.push(smn);
+            res[1] = k;
             count = true;
             break;
           }
@@ -203,10 +203,10 @@ $(document).ready(function () {
       dictionary = testDictionary(newVal);
       resultText2 = `It contains the <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common dictionary words: </a> <h6 class = "part">${dictionary}</h6>`;
     } catch {
-      resultText2 = `This password doesn't contain any common dictionary words.`;
+      resultText2 = `This password doesn't contain any <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common dictionary words. </a>`;
     }
     if (dictionary == null) {
-      resultText2 = `This password doesn't contain any common dictionary words.`;
+      resultText2 = `This password doesn't contain any <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common dictionary words. </a>`;
     }
 
     setTimeout(function () {
@@ -248,9 +248,9 @@ $(document).ready(function () {
     var resultText4;
     const patterns = checkPattern(newVal);
     if (patterns != null) {
-      resultText4 = `This password contains the common password patterns: <h6 class = "part">${patterns}</h6>`;
+      resultText4 = `This password contains the <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common password patterns: </a> <h6 class = "part">${patterns}</h6>`;
     } else {
-      resultText4 = `This password does not contain any common password patterns.`;
+      resultText4 = `This password does not contain any <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common password patterns. </a>`;
     }
 
     setTimeout(function () {
@@ -274,7 +274,7 @@ $(document).ready(function () {
         if (hash[0] === suffix.toUpperCase()) {
           numBreaches = parseInt(hash[1]);
 
-          const resultText1 = `This password has been leaked <h6 class = "part">${numBreaches}</h6> times.`;
+          const resultText1 = `This password has been <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> leaked</a> <h6 class = "part">${numBreaches}</h6> times.`;
 
           $("<div>")
             .attr("id", "result1")
@@ -288,7 +288,7 @@ $(document).ready(function () {
       if (numBreaches == null) {
         numBreaches = 0;
 
-        const resultText1 = `This password has been leaked <h6 id = "numBreaches" class = "part">${numBreaches}</h6> times.`;
+        const resultText1 = `This password has been <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> leaked</a> <h6 id = "numBreaches" class = "part">${numBreaches}</h6> times.`;
         $("<div>")
           .attr("id", "result1")
           .addClass("results")

@@ -26,21 +26,24 @@
       <li>
         Enter the password of which strength you would like to check, and click
         enter <br />
-        Results will be provided on the screen. <br />
+        The provided password will be analyzed in terms of previous breaches,
+        length, complexity, pattern, and language, and results will be provided
+        on the screen. <br />
         Results will be separated into 3 tiers:
         <ol>
           <li>
-            Tier 1: The screen will flash red. This means the provided password
-            is extremely vulnerable.
+            Tier 1: The scale will show a result in red. This means the provided
+            password is less than 25% secure, making it extremely vulnerable.
           </li>
           <li>
-            Tier 2: The screen will flash yellow. This means the provided
-            password is mildly vulnerable.
+            Tier 2: The scale will show a result in yellow. This means the
+            provided password is between 25% and 50% secure, making it mildly
+            vulnerable.
           </li>
           <li>
-            Tier 3: The screen will flash green. This means the provided
-            password is not vulnerable, and has been previously cracked little
-            to no times.
+            Tier 3: The scale will show a result in green. This means the
+            provided password is above 50% secure, making it relatively less
+            vulnerable.
           </li>
         </ol>
       </li>
@@ -154,9 +157,24 @@
     <p>
       This feature tackles the unawareness problem existent among users. A user
       can input a password, and using existing APIs and databases, our website
-      will display information such as whether the password has been involved in
-      a leakage, how long it would take to hack on average, the probability of a
-      breach, etc&hellip;
+      will display the following information:
+      <br />
+      <li>
+        Number of Breaches: How many times the password has been leaked before.
+      </li>
+      <li>
+        Common Dictionary Words: Whether or not the password includes any basic
+        english words that susceptible to guessing, and what they are.
+      </li>
+      <li>Length of the Password.</li>
+      <li>
+        Complexity: An analysis of how the password makes use of uppercase
+        characters, numbers, and symbols.
+      </li>
+      <li>
+        Common Patterns: Whether or not the password includes common password
+        patterns that, again, can make it susceptible to a dictionary attack.
+      </li>
     </p>
     <p>
       This will help users understand the importance of choosing strong
@@ -165,16 +183,14 @@
 
     <ol start="2">
       <li>
-        <p>Pop-up Meme</p>
+        <p>Visual Scale</p>
       </li>
     </ol>
     <p>
-      We will use humor to engage users by making memes to display the above
-      information, i.e. how easily their passwords can get hacked and drive home
-      the point that using weak passwords may lead to quick security breaches.
-      We will do this by taking the calculated probability of getting hacked and
-      displaying the corresponding comic strip. This way, users are less likely
-      to ignore the threat.
+      The website includes a visual meter that allows the user to visualize the
+      degree of how vulnerable their password is, on a scale of 1-100. Using
+      animations and color schemes, visual learners can better comprehend the
+      degree of their password's strength.
     </p>
     <ol start="3">
       <li>
@@ -221,69 +237,36 @@
     </h1>
     <ul>
       <li>
-        Brute-Force:
+        Number of times a password has been leaked:
         <p>
-          A form of attack where the user attempts every possible combination of
-          letters, numbers, and symbols of the provided length until the correct
-          password is achieved.
-        </p>
-        <p>
-          Our calculations assume a trial of one password per second (which
-          likely requires computational power), and calculates the worst-case
-          time such that the correct password is the last one attempted.
-        </p>
-      </li>
-      <li>
-        Dictionary Attack:
-        <p>
-          A form of attack where the attacker attempts to crack the password
-          based on a 'dictionary' of commonly/previously hacked passwords in
-          order of frequency and popularity.
-        </p>
-        <p>
-          Unlike brute-force, a standard dictionary attack depends on a
-          multitude of factors and cannot be directly calculated. Hence, our
-          results are presented relative to the most hacked password known.
-        </p>
-      </li>
-      <li>
-        Most Leaked Password:
-        <p>
-          According to
+          This information is directly imported from the
           <a href="https://haveibeenpwned.com/Passwords"> haveibeenpwned.com</a>
-          and
+          public API.
+        </p>
+      </li>
+      <li>
+        Common Dictionary Words:
+        <p>
+          A database of the simplest and most basic words of the English
+          language, as put together by
+          <a
+            href="https://en.wiktionary.org/wiki/Appendix:1000_basic_English_words#:~:text=a%2C%20about%2C%20above%2C%20across,%2C%20aunt%2C%20autumn%2C%20away."
+          >
+            Wiktionary.org</a
+          >
+        </p>
+      </li>
+      <li>
+        Common Password Patterns:
+        <p>
+          A database of the most common patterns found in passwords, as per
+          ourselves and
           <a
             href="https://cybernews.com/best-password-managers/most-common-passwords/"
-            >cybernews.com</a
-          >, the most leaked password is currently '123456', which has been
-          hacked 37,615,083 times.
+            >cybernews.com.</a
+          >
         </p>
       </li>
     </ul>
-    <br />
-    <h1 id="jumpTo">
-      <strong><span style="font-size: 20px">Calculations</span></strong>
-    </h1>
-    <ol>
-      <li>
-        <b>Percent cracked relative to most leaked password (refer above) </b
-        ><br />
-        = [(Leakage frequency of most leaked password - Leakage frequency of
-        input password) / 100] x 100%
-      </li>
-      <br />
-      <li>
-        <b>Time it would take to crack using brute-force </b><br />
-        = Length of provided password ^ 69 (no. of letters, numbers, and common
-        symbols)
-      </li>
-      <br />
-      <li>
-        <b>Time it would take to crack relative to most leaked password </b
-        ><br />
-        = Number of times the most hacked password has been hacked/ the number
-        of times the provided password has been hacked
-      </li>
-    </ol>
   </body>
 </html>
