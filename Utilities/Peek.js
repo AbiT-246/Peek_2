@@ -28,21 +28,17 @@ $(document).ready(function () {
 
     var list2 = list1[0].split(", ");
     list2 = list2.map((i) => i);
-    console.log(list2);
     const word = given.replace(/[^a-zA-Z ]/g, "");
     var res = [];
 
     for (let i = 0; i < word.length - 2; i++) {
       for (let j = i + 2; j < word.length; j++) {
         var smn = word.substring(i, j + 1);
-        console.log(smn);
         if (list2.includes(smn)) {
-          console.log(true);
           res.push(`"${smn}"`);
         }
       }
     }
-    console.log(res);
     info.push(res.length);
     if (res.length == 0) {
       return null;
@@ -106,10 +102,10 @@ $(document).ready(function () {
     for (let i = 0; i < word.length - 2; i++) {
       for (let j = i + 2; j < word.length; j++) {
         var smn = word.substring(i, j + 1);
+        console.log(smn);
         for (const k of list0) {
           if (k == smn && k.length > res[0].length) {
-            console.log(smn);
-            res[0] = k;
+            res.push(smn);
             count = true;
             break;
           }
@@ -120,6 +116,7 @@ $(document).ready(function () {
         }
       }
     }
+    console.log(res[1]);
 
     if (res.length == 1 && count == false) {
       info.push(0);
@@ -140,14 +137,12 @@ $(document).ready(function () {
       result =
         res.slice(0, -1).join(", ") + ", and " + res[res.length - 1] + ".";
     }
-
+    console.log(res);
     return result;
   }
 
   function calculate(values) {
     const [word, complexity, pattern, numBreaches, length] = values;
-    console.log(values[4]);
-    console.log(numBreaches);
     var leaked = null;
     if (numBreaches == 0) {
       leaked = 45;
@@ -183,6 +178,12 @@ $(document).ready(function () {
 
   $("form").on("submit", async function (e) {
     e.preventDefault(); // Prevent the default form submission behavior
+    info = [];
+    $("#inner").removeClass("red");
+    $("#inner").removeClass("yellow");
+    $("#inner").removeClass("green");
+    $("#inner").css("height", "0%");
+
     $(".navbar").removeClass("navbar1");
     $("#arrow").hide();
     $("#meme1").hide();
@@ -205,7 +206,6 @@ $(document).ready(function () {
     if (dictionary == null) {
       resultText2 = `This password doesn't contain any common dictionary words.`;
     }
-    console.log(dictionary);
 
     setTimeout(function () {
       $("<div>")
