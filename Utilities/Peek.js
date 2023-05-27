@@ -2,6 +2,7 @@ $(document).ready(function () {
   var info = [];
   $("#meme1").hide();
   $("#Happy").hide();
+  $(".scale").hide();
 
   const changeColors = (calc) => {
     if (calc <= 95) {
@@ -179,6 +180,7 @@ $(document).ready(function () {
   $("form").on("submit", async function (e) {
     e.preventDefault(); // Prevent the default form submission behavior
     info = [];
+    $(".scale").show();
     $("#inner").removeClass("red");
     $("#inner").removeClass("yellow");
     $("#inner").removeClass("green");
@@ -300,6 +302,9 @@ $(document).ready(function () {
       const result = calculate(info);
 
       console.log(result);
+      $(".newDiv")
+        .addClass("border-left border-secondary")
+        .css("box-shadow: 3px -1px 15px #565353ad inset");
       if (result <= 25) {
         $("#inner").addClass("red");
       } else if (result <= 50) {
