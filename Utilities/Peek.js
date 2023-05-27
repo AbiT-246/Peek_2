@@ -201,7 +201,7 @@ $(document).ready(function () {
     var resultText2;
     try {
       dictionary = testDictionary(newVal);
-      resultText2 = `This password contains the <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common dictionary words: </a> <h6 class = "part">${dictionary}</h6>`;
+      resultText2 = `It contains the <a style = "text-decoration: underline; font-size: 16px; color: white" class="navbar-brand" href="Utilities/About.html#jumpTo"> common dictionary words: </a> <h6 class = "part">${dictionary}</h6>`;
     } catch {
       resultText2 = `This password doesn't contain any common dictionary words.`;
     }
