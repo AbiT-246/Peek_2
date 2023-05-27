@@ -1,3 +1,5 @@
+> **This is an update of Peek
+
 # Usage
 
 1. Enter the password of which strength you would like to check, and click enter
