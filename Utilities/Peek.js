@@ -282,12 +282,12 @@ $(document).ready(function () {
       const result = calculate(info);
 
       console.log(result);
-      $(".newDiv")
-        .addClass("border-left border-secondary")
-        .css("box-shadow: 3px -1px 15px #565353ad inset");
+      $(".newDiv").addClass("border-left border-secondary");
       if (result <= 25) {
         $("#inner").addClass("red");
       } else if (result <= 50) {
+        $("#inner").addClass("orange");
+      } else if (result <= 75) {
         $("#inner").addClass("yellow");
       } else {
         $("#inner").addClass("green");
