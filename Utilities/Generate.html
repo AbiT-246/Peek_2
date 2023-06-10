@@ -39,9 +39,17 @@
         background: #f29f0930;
         border: none;
       }
+      .spec {
+        position: relative;
+        top: -10px;
+        margin: auto;
+        height: 40px;
+        color: #dcd7d7;
+        background: #f29f0930;
+        border: none;
+      }
       #specLabel {
         position: relative;
-        left: 215px;
         bottom: -10px;
       }
       .symbol {
@@ -219,12 +227,13 @@
         <p>
           <button
             id="specLabel"
-            class="prompt btn btn-secondary"
+            class="spec btn btn-secondary"
             type="button"
             data-toggle="collapse"
             data-target="#collapseExample4"
             aria-expanded="false"
             aria-controls="collapseExample"
+            style="left: 61%"
           >
             Minimum Password Length
           </button>
@@ -247,16 +256,15 @@
         />
       </div>
     </form>
-    <div>
+    <div class="text-center">
       <button
         type="button"
         id="symbolChooser"
-        class="prompt btn btn-secondary"
+        class="mb-3 spec btn btn-secondary"
         data-container="body"
         data-toggle="popover"
         data-placement="left"
         data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-        style="left: 280px"
       >
         Click here to include symbols
       </button>
