@@ -57,7 +57,6 @@ $(document).ready(function () {
 
       $("body").empty();
       var url = "Display.html";
-      var arrStr = encodeURIComponent(qnlist);
       url +=
         "?password=" +
         encodeURIComponent(display) +

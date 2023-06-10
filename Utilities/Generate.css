@@ -1,0 +1,56 @@
+#generate {
+  height: 50px;
+  position: fixed;
+  left: 1100px;
+  top: 500px;
+}
+.formEl {
+  max-width: 550px;
+  margin: auto;
+  position: relative;
+}
+.formEl:not(.form-check) {
+  background-color: #d1d1d1;
+}
+form {
+  margin: 50px;
+}
+.prompt {
+  position: relative;
+  left: 20%;
+  top: -10px;
+  margin: auto;
+  height: 40px;
+  color: #dcd7d7;
+  background: #f29f0930;
+  border: none;
+}
+.spec {
+  position: relative;
+  top: -10px;
+  margin: auto;
+  height: 40px;
+  color: #dcd7d7;
+  background: #f29f0930;
+  border: none;
+}
+#specLabel {
+  position: relative;
+  bottom: -10px;
+}
+.symbol {
+  background-color: orange;
+}
+.card,
+.collapse {
+  background-color: transparent;
+  color: #e4e4e4ba;
+  max-width: 700px;
+  font-family: monospace;
+  border: none;
+}
+body {
+  background: url(Background.jpg) rgba(0, 0, 0, 73%);
+  background-size: cover;
+  background-blend-mode: multiply;
+}
